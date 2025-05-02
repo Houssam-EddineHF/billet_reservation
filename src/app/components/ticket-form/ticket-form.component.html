@@ -1,0 +1,122 @@
+<div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold mb-6 text-center text-indigo-700">Réserver un Billet</h2>
+  
+  <div *ngIf="success" class="mb-4 p-3 bg-green-100 text-green-700 rounded-md">
+    Réservation créée avec succès!
+  </div>
+  
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Nom -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+      <input 
+        type="text" 
+        id="name" 
+        formControlName="name" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        [ngClass]="{'border-red-500': submitted && f['name'].errors}"
+      >
+      <div *ngIf="submitted && f['name'].errors" class="mt-1 text-sm text-red-600">
+        <span *ngIf="f['name'].errors['required']">Le nom est requis</span>
+      </div>
+    </div>
+    
+    <!-- Email -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        [ngClass]="{'border-red-500': submitted && f['email'].errors}"
+      >
+      <div *ngIf="submitted && f['email'].errors" class="mt-1 text-sm text-red-600">
+        <span *ngIf="f['email'].errors['required']">L'email est requis</span>
+        <span *ngIf="f['email'].errors['email']">L'email n'est pas valide</span>
+      </div>
+    </div>
+    
+    <!-- Nom de l'événement -->
+    <div>
+      <label for="eventName" class="block text-sm font-medium text-gray-700">Nom de l'événement</label>
+      <input 
+        type="text" 
+        id="eventName" 
+        formControlName="eventName" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        [ngClass]="{'border-red-500': submitted && f['eventName'].errors}"
+      >
+      <div *ngIf="submitted && f['eventName'].errors" class="mt-1 text-sm text-red-600">
+        <span *ngIf="f['eventName'].errors['required']">Le nom de l'événement est requis</span>
+      </div>
+    </div>
+    
+    <!-- Date de l'événement -->
+    <div>
+      <label for="eventDate" class="block text-sm font-medium text-gray-700">Date de l'événement</label>
+      <input 
+        type="date" 
+        id="eventDate" 
+        formControlName="eventDate" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        [ngClass]="{'border-red-500': submitted && f['eventDate'].errors}"
+      >
+      <div *ngIf="submitted && f['eventDate'].errors" class="mt-1 text-sm text-red-600">
+        <span *ngIf="f['eventDate'].errors['required']">La date de l'événement est requise</span>
+      </div>
+    </div>
+    
+    <!-- Quantité -->
+    <div>
+      <label for="quantity" class="block text-sm font-medium text-gray-700">Quantité</label>
+      <input 
+        type="number" 
+        id="quantity" 
+        formControlName="quantity" 
+        min="1" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        [ngClass]="{'border-red-500': submitted && f['quantity'].errors}"
+      >
+      <div *ngIf="submitted && f['quantity'].errors" class="mt-1 text-sm text-red-600">
+        <span *ngIf="f['quantity'].errors['required']">La quantité est requise</span>
+        <span *ngIf="f['quantity'].errors['min']">La quantité doit être au moins 1</span>
+      </div>
+    </div>
+    
+    <!-- Prix -->
+    <div>
+      <label for="price" class="block text-sm font-medium text-gray-700">Prix unitaire (DH)</label>
+      <input 
+        type="number" 
+        id="price" 
+        formControlName="price" 
+        min="0" 
+        step="0.01" 
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        [ngClass]="{'border-red-500': submitted && f['price'].errors}"
+      >
+      <div *ngIf="submitted && f['price'].errors" class="mt-1 text-sm text-red-600">
+        <span *ngIf="f['price'].errors['required']">Le prix est requis</span>
+        <span *ngIf="f['price'].errors['min']">Le prix ne peut pas être négatif</span>
+      </div>
+    </div>
+    
+    <!-- Boutons -->
+    <div class="flex space-x-4">
+      <button 
+        type="submit" 
+        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Réserver
+      </button>
+      <button 
+        type="button" 
+        (click)="resetForm()" 
+        class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>
